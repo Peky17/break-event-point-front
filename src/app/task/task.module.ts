@@ -17,7 +17,7 @@ import { FooterComponent } from './pages/main-task/shared/footer/footer.componen
   imports: [
     CommonModule,
     TaskRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   exports: [
     MainTaskComponent,

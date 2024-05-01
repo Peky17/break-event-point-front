@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { BreakEventPointService } from 'src/app/services/break-event-point.service';
 import Swal from 'sweetalert2';
 import { Observer } from 'rxjs';
+import Chart from 'chart.js/auto';
 
 @Component({
   selector: 'app-main-task',
@@ -9,6 +10,7 @@ import { Observer } from 'rxjs';
   styleUrls: ['./main-task.component.css'],
 })
 export class MainTaskComponent implements OnInit {
+  public chart: any;
   totalCV: number = 0;
   totalCF: number = 0;
   cantidadEquilibrio: number = 0;
@@ -18,11 +20,35 @@ export class MainTaskComponent implements OnInit {
   constructor(private breakEventPointService: BreakEventPointService) {}
 
   async ngOnInit() {
-    await this.getTotalCV();
-    await this.getTotalCF();
-    await this.getCantidadEquilibrio(300);
-    await this.getIngresoEquilibrio(300);
     await this.getGraphData(300, 156);
+    console.log(this.graphData);
+    const canvas = document.getElementById('myChart') as HTMLCanvasElement;
+    const myChart: any = canvas.getContext('2d');
+
+    const data = {
+      labels: ['January', 'February', 'March', 'April'],
+      datasets: [
+        {
+          label: 'My Dataset',
+          data: [10, 20, 30, 40],
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1,
+        },
+      ],
+    };
+    const options = {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    };
+    const chart = new Chart(myChart, {
+      type: 'bar',
+      data: data,
+      options: options,
+    });
   }
 
   // Método para obtener el total del costo variable
