@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BreakEventPointService } from 'src/app/services/break-event-point.service';
 import Swal from 'sweetalert2';
-import { Observer } from 'rxjs';
 import Chart from 'chart.js/auto';
 
 @Component({
@@ -26,26 +25,46 @@ export class MainTaskComponent implements OnInit {
     const myChart: any = canvas.getContext('2d');
 
     const data = {
-      labels: ['January', 'February', 'March', 'April'],
+      labels: this.graphData.map((dataPoint: any) => dataPoint.index),
       datasets: [
         {
-          label: 'My Dataset',
-          data: [10, 20, 30, 40],
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
-          borderColor: 'rgba(75, 192, 192, 1)',
-          borderWidth: 1,
+          label: 'Costo Total',
+          data: this.graphData.map((dataPoint: any) => dataPoint.costoTotal),
+          fill: false,
+          borderColor: 'rgba(75, 192, 192, 1)', // Color de la línea del costo total
+          tension: 0.1, // Tensión de la línea
+        },
+        {
+          label: 'Ingreso de Venta',
+          data: this.graphData.map(
+            (dataPoint: any) => dataPoint.ingresoOfVenta
+          ),
+          fill: false,
+          borderColor: 'rgba(255, 99, 132, 1)', // Color de la línea del ingreso de venta
+          tension: 0.1, // Tensión de la línea
         },
       ],
     };
     const options = {
       scales: {
+        x: {
+          display: true,
+          title: {
+            display: true,
+            text: 'Índice', // Etiqueta del eje X
+          },
+        },
         y: {
-          beginAtZero: true,
+          display: true,
+          title: {
+            display: true,
+            text: 'Valor', // Etiqueta del eje Y
+          },
         },
       },
     };
     const chart = new Chart(myChart, {
-      type: 'bar',
+      type: 'line', // Cambiar el tipo de gráfico a línea
       data: data,
       options: options,
     });
