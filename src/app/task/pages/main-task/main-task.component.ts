@@ -20,7 +20,6 @@ export class MainTaskComponent implements OnInit {
 
   async ngOnInit() {
     await this.getGraphData(300, 156);
-    console.log(this.graphData);
     const canvas = document.getElementById('myChart') as HTMLCanvasElement;
     const myChart: any = canvas.getContext('2d');
 
