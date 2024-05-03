@@ -14,8 +14,6 @@ interface CostoVariable {
   styleUrls: ['./costos-variables.component.css'],
 })
 export class CostosVariablesComponent {
-  @Input() costo: any;
-
   costosVariablesList: CostoVariable[] = [];
 
   constructor(private costosVariablesService: CostoVariableService) {}
