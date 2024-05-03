@@ -1,1 +1,22 @@
-<p>costos-fijos works!</p>
+<div class="card">
+  <div class="card-header">
+    <h6 class="card-title>">Lista de costos fijos</h6>
+  </div>
+  <!-- Tabla de costos variables -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Descripción</th>
+        <th>Monto</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let costo of costosFijosList">
+        <td>{{ costo.id }}</td>
+        <td>{{ costo.descripcion }}</td>
+        <td>{{ costo.monto }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -17,8 +17,8 @@ export class CostoFijoService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getCostoFijoList(): Observable<CostoFijoResponse> {
-    return this.httpClient.get<CostoFijoResponse>(
+  getCostoFijoList(): Observable<CostoFijoResponse[]> {
+    return this.httpClient.get<CostoFijoResponse[]>(
       `${this.baseUrl}/api/v1/costos-fijos`
     );
   }
