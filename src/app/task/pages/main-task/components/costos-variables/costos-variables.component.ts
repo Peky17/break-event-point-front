@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { CostoVariableService } from 'src/app/services/costo-variable.service';
+import Swal from 'sweetalert2';
 
 interface CostoVariable {
   id: number;
   descripcion: string;
   monto: number;
 }
+
 @Component({
   selector: 'app-costos-variables',
   templateUrl: './costos-variables.component.html',

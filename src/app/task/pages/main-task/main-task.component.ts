@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BreakEventPointService } from 'src/app/services/break-event-point.service';
 import Swal from 'sweetalert2';
 import Chart from 'chart.js/auto';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-main-task',
@@ -9,6 +10,7 @@ import Chart from 'chart.js/auto';
   styleUrls: ['./main-task.component.css'],
 })
 export class MainTaskComponent implements OnInit {
+  myForm!: FormGroup;
   public chart: any;
   totalCV: number = 0;
   totalCF: number = 0;
@@ -16,9 +18,22 @@ export class MainTaskComponent implements OnInit {
   ingresoEquilibrio: number = 0;
   graphData: any;
 
-  constructor(private breakEventPointService: BreakEventPointService) {}
+  constructor(
+    private breakEventPointService: BreakEventPointService,
+    private formBuilder: FormBuilder
+  ) {}
 
   async ngOnInit() {
+    this.myForm = this.formBuilder.group({
+      precioUnitarioVenta: [
+        300,
+        [Validators.required, Validators.min(0), Validators.max(1000)],
+      ],
+      qtyUnidadesVendidas: [
+        156,
+        [Validators.required, Validators.min(0), Validators.max(1000)],
+      ],
+    });
     // Llamar a los métodos para obtener los datos de costos
     await this.getTotalCV();
     await this.getTotalCF();
@@ -27,8 +42,19 @@ export class MainTaskComponent implements OnInit {
     await this.getIngresoEquilibrio(300);
     // Llamar a los métodos para obtener los datos de la grafica
     await this.getGraphData(300, 156);
+    await this.renderChart();
+  }
+
+  // Método para renderizar gráfico
+  async renderChart() {
     const canvas = document.getElementById('myChart') as HTMLCanvasElement;
     const myChart: any = canvas.getContext('2d');
+
+    // Verificar si hay un gráfico existente y destruirlo si es necesario
+    if (this.chart) {
+      this.chart.destroy();
+    }
+
     const data = {
       labels: this.graphData.map((dataPoint: any) => dataPoint.index),
       datasets: [
@@ -68,11 +94,30 @@ export class MainTaskComponent implements OnInit {
         },
       },
     };
-    const chart = new Chart(myChart, {
+    this.chart = new Chart(myChart, {
       type: 'line', // Cambiar el tipo de gráfico a línea
       data: data,
       options: options,
     });
+  }
+
+  async calcularPuntoEquilibrio() {
+    if (this.myForm.valid) {
+      const unitPriceVenta = this.myForm.get('precioUnitarioVenta')?.value;
+      const qtyUnidades = this.myForm.get('qtyUnidadesVendidas')?.value;
+      // Llamar a los métodos para obtener los datos de equilibrio
+      await this.getCantidadEquilibrio(unitPriceVenta);
+      await this.getIngresoEquilibrio(unitPriceVenta);
+      // Llamar a los métodos para obtener los datos de la grafica
+      await this.getGraphData(unitPriceVenta, qtyUnidades);
+      await this.renderChart();
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Por favor, ingrese los datos correctamente.',
+      });
+    }
   }
 
   // Método para obtener el total del costo variable

@@ -3,20 +3,36 @@
     <h6 class="card-title>">Lista de costos variables</h6>
   </div>
   <!-- Tabla de costos fijos -->
-  <table class="table">
+  <table class="table table-hover">
     <thead>
       <tr>
         <th>ID</th>
         <th>Descripción</th>
         <th>Monto</th>
+        <th>Acción</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let costo of costosVariablesList">
         <td>{{ costo.id }}</td>
         <td>{{ costo.descripcion }}</td>
-        <td>{{ costo.monto }}</td>
+        <td>{{ costo.monto | currency : "MXN" }}</td>
+        <td>
+          <div class="btn-group">
+            <button class="btn btn-secondary btn-sm">
+              <i class="fa fa-pen"></i>
+            </button>
+            <button class="btn btn-danger btn-sm">
+              <i class="fa fa-trash"></i>
+            </button>
+          </div>
+        </td>
       </tr>
     </tbody>
   </table>
+  <div class="card-footer">
+    <button class="btn btn-secondary btn-sm">
+      <i class="fa fa-plus"></i> Agregar costo variable
+    </button>
+  </div>
 </div>

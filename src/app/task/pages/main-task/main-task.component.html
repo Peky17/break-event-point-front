@@ -6,6 +6,45 @@
   <br />
   <div class="row">
     <div class="col-md-9">
+      <!-- Formulario reactivo -->
+      <form [formGroup]="myForm">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="precioUnitarioVenta"><b>P.U.V:</b></label>
+              <input
+                class="form-control form-control-sm"
+                placeholder="Precio unitario de venta"
+                type="number"
+                id="precioUnitarioVenta"
+                formControlName="precioUnitarioVenta"
+              />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="qtyUnidadesVendidas"><b>C.U.V:</b></label>
+              <input
+                class="form-control form-control-sm"
+                placeholder="Cantidad de unidades vendidas"
+                type="number"
+                id="qtyUnidadesVendidas"
+                formControlName="qtyUnidadesVendidas"
+              />
+            </div>
+          </div>
+          <div class="col-md-5">
+            <br />
+            <button
+              class="btn btn-primary btn-sm"
+              (click)="calcularPuntoEquilibrio()"
+            >
+              Calcular <i class="fa fa-calculator"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+      <br />
       <!-- Renderizar gráfica -->
       <canvas id="myChart"></canvas>
       <hr />
@@ -42,8 +81,8 @@
         </div>
         <div class="card-body">
           <p>
-            Cantidad de equilibrio:
-            <b>{{ cantidadEquilibrio | currency : "MXN" }}</b>
+            Cantidad de ventas equilibrio:
+            <b>{{ cantidadEquilibrio | number }}</b>
           </p>
           <hr />
           <p>
@@ -53,7 +92,6 @@
         </div>
       </div>
     </div>
-    <br />
   </div>
   <br /><br />
 </div>
