@@ -36,8 +36,13 @@
           <h6 class="card-title>">Información de costos</h6>
         </div>
         <div class="card-body">
-          <p>Costo fijo total:</p>
-          <p>Costo variable total:</p>
+          <p>
+            Costo fijo total: <b>{{ totalCF | currency : "MXN" }}</b>
+          </p>
+          <hr />
+          <p>
+            Costo variable total: <b>{{ totalCV | currency : "MXN" }}</b>
+          </p>
         </div>
       </div>
 
@@ -46,8 +51,15 @@
           <h6 class="card-title>">Información de equilibrio</h6>
         </div>
         <div class="card-body">
-          <p>Cantidad de equilibrio:</p>
-          <p>Ingreso de equilibrio:</p>
+          <p>
+            Cantidad de equilibrio:
+            <b>{{ cantidadEquilibrio | currency : "MXN" }}</b>
+          </p>
+          <hr />
+          <p>
+            Ingreso de equilibrio:
+            <b>{{ ingresoEquilibrio | currency : "MXN" }}</b>
+          </p>
         </div>
       </div>
     </div>

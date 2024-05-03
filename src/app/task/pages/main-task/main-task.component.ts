@@ -19,10 +19,16 @@ export class MainTaskComponent implements OnInit {
   constructor(private breakEventPointService: BreakEventPointService) {}
 
   async ngOnInit() {
+    // Llamar a los métodos para obtener los datos de costos
+    await this.getTotalCV();
+    await this.getTotalCF();
+    // Llamar a los métodos para obtener los datos de equilibrio
+    await this.getCantidadEquilibrio(300);
+    await this.getIngresoEquilibrio(300);
+    // Llamar a los métodos para obtener los datos de la grafica
     await this.getGraphData(300, 156);
     const canvas = document.getElementById('myChart') as HTMLCanvasElement;
     const myChart: any = canvas.getContext('2d');
-
     const data = {
       labels: this.graphData.map((dataPoint: any) => dataPoint.index),
       datasets: [
@@ -156,7 +162,7 @@ export class MainTaskComponent implements OnInit {
         .subscribe({
           next: (data) => {
             this.graphData = data;
-            Swal.close(); // Cerrar el spinner
+            Swal.close();
             resolve();
           },
           error: (error) => {
