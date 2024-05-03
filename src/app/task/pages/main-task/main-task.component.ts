@@ -142,11 +142,21 @@ export class MainTaskComponent implements OnInit {
   // Método para obtener los datos del gráfico
   getGraphData(unitPriceVenta: number, qtyUnidades: number): Promise<void> {
     return new Promise<void>((resolve, reject) => {
+      Swal.fire({
+        title: 'Cargando',
+        text: 'Por favor espere...',
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        willOpen: () => {
+          Swal.showLoading();
+        },
+      }); // Mostrar el spinner
       this.breakEventPointService
         .getGraphData(unitPriceVenta, qtyUnidades)
         .subscribe({
           next: (data) => {
             this.graphData = data;
+            Swal.close(); // Cerrar el spinner
             resolve();
           },
           error: (error) => {
