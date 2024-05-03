@@ -1,1 +1,29 @@
-<p>delete-costo-variable works!</p>
+<!-- Contenido del modal template -->
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Eliminar costo</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="d('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <p class="text-center">¿Esta seguro que desea borrar el costo?</p>
+    <h2 class="text-center">{{ costo.descripcion }}</h2>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-danger"
+      (click)="eliminarCosto()"
+    >
+      Eliminar costo
+    </button>
+  </div>
+</ng-template>
+
+<button class="btn btn-danger btn-sm" (click)="open(content)">
+  <i class="fa fa-trash"></i>
+</button>
