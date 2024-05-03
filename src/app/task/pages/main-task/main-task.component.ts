@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BreakEventPointService } from 'src/app/services/break-event-point.service';
 import Swal from 'sweetalert2';
 import Chart from 'chart.js/auto';
