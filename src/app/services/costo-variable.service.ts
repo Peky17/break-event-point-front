@@ -17,8 +17,8 @@ export class CostoVariableService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getCostoVariableList(): Observable<CostoVariableResponse> {
-    return this.httpClient.get<CostoVariableResponse>(
+  getCostoVariableList(): Observable<CostoVariableResponse[]> {
+    return this.httpClient.get<CostoVariableResponse[]>(
       `${this.baseUrl}/api/v1/costos-variables`
     );
   }
