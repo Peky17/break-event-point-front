@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CostoVariableService } from 'src/app/services/costo-variable.service';
 import Swal from 'sweetalert2';
 
@@ -14,6 +14,8 @@ interface CostoVariable {
   styleUrls: ['./costos-variables.component.css'],
 })
 export class CostosVariablesComponent {
+  @Input() costo: any;
+
   costosVariablesList: CostoVariable[] = [];
 
   constructor(private costosVariablesService: CostoVariableService) {}
