@@ -1,1 +1,46 @@
-<p>update-costo-fijo works!</p>
+<!-- Contenido del modal template -->
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Actualizar costo</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="d('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="updateFormulario" (ngSubmit)="updateCosto()">
+      <div class="form-group">
+        <label for="descripcion"><b>Descripción</b></label>
+        <br />
+        <input
+          formControlName="descripcion"
+          type="text"
+          class="form-control"
+          id="descripcion"
+        />
+      </div>
+      <br />
+      <div class="form-group">
+        <label for="monto"><b>Monto $</b></label>
+        <br />
+        <input
+          formControlName="monto"
+          type="number"
+          class="form-control"
+          id="monto"
+        />
+      </div>
+      <br /><br />
+      <button type="submit" class="btn btn-outline-success">
+        Editar costo <i class="fa fa-pen"></i>
+      </button>
+    </form>
+  </div>
+</ng-template>
+
+<!-- Botón que accionará el modal -->
+<button type="submit" class="btn btn-secondary btn-sm" (click)="open(content)">
+  <i class="fa fa-pen" style="margin-left: 2px"></i>
+</button>

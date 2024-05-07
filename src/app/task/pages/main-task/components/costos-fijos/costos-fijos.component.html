@@ -18,21 +18,20 @@
         <td>{{ costo.descripcion }}</td>
         <td>{{ costo.monto | currency : "MXN" }}</td>
         <td>
-          <div class="btn-group">
-            <button class="btn btn-secondary btn-sm">
-              <i class="fa fa-pen"></i>
-            </button>
-            <button class="btn btn-danger btn-sm">
-              <i class="fa fa-trash"></i>
-            </button>
+          <div class="">
+            <!-- Edit modal -->
+            <app-update-costo-fijo
+              style="margin: 2px"
+              [costo]="costo"
+            ></app-update-costo-fijo>
+            <!-- Delete modal -->
+            <app-delete-costo-fijo [costo]="costo"></app-delete-costo-fijo>
           </div>
         </td>
       </tr>
     </tbody>
   </table>
   <div class="card-footer">
-    <button class="btn btn-secondary btn-sm">
-      <i class="fa fa-plus"></i> Agregar costo fijo
-    </button>
+    <app-create-costo-fijo></app-create-costo-fijo>
   </div>
 </div>

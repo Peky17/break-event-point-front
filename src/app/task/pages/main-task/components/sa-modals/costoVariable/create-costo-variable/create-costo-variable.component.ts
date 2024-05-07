@@ -52,7 +52,7 @@ export class CreateCostoVariableComponent {
           // Alertar
           Swal.fire({
             title: 'OPERACIÓN EXITOSA',
-            text: 'Tarea registrada con éxito',
+            text: 'Costo registrado con éxito',
             icon: 'success',
           }).then(() => {
             // Recargar la página
